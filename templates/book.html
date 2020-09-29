@@ -10,6 +10,7 @@
             <p class="font-weight-bold">Giá: ${{book.price|floatformat:2}}</p>
             <p>{{book.body|truncatechars:50}}</p>
             <p><button class="btn btn-primary">AddtoCard</button></p>
+            <p><a href="{% url 'update-book' book.id %}" class="badge badge-success btn-sm">Update</a></p>
             <p><a href="{% url 'delete-book' book.id %}" class="badge badge-danger btn-sm">Delete</a></p>
         </div>
     </div>

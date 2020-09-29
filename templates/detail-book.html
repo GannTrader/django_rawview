@@ -4,6 +4,9 @@
     <div class="card-body">
         <h2>{{object.title|title}}</h2>
         <p>{{ object.body }}</p>
+        <p><img src="/media/{{object.media}}" alt="" width="50%"></p>
+        <p><a href="{% url 'update-book' object.id %}" class="badge badge-success">Update</a><a
+                href="{% url 'delete-book' object.id %}" class="badge badge-danger">Delete</a></p>
         <p><a href="{% url 'book' %}" class="btn btn-dark">Back</a></p>
     </div>
 </div>

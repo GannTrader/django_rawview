@@ -61,14 +61,22 @@ class CreateBookView(View):
 
 
 class UpdateBookView(View):
-    form = BookForm()
     template_name = "update-book.html"
-    context = {"form": form}
-    def get(self, request, *args, **kwargs):
+    def get_object(self):
         _id = self.kwargs.get("id")
         queryset = BookModel.objects.get(id=_id)
-        # context = {"form": queryset}
-        return render(request, self.template_name, self.context)
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        form = BookForm(instance=self.get_object())
+        context = {"form": form}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        form = BookForm(request.POST, request.FILES, instance=self.get_object())
+        if form.is_valid():
+            form.save()
+            return redirect("book")
 
 class DeleteBookView(View):
     def get(self, request, *args, **kwargs):
